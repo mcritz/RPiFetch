@@ -57,8 +57,15 @@ guard let jsonData = contents.data(using: .utf8) else {
 
 let decoder = JSONDecoder()
 
-let response = try? decoder.decode(DarkSkyResponse.self, from: jsonData)
+if let response: DarkSkyResponse = decoder.decode(DarkSkyResponse.self, from: jsonData) 
 
 print("completed decode")
-print(response?.currentWeather.temperature)
+print(response)
+print("\(response?.currentWeather.temperature)")
+
+
+
+
+
+
 
