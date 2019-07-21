@@ -61,7 +61,7 @@ let response = try? decoder.decode(DarkSkyResponse.self, from: jsonData)
 
 print("completed decode")
 print(response)
-print("\(response?.currentWeather.temperature)")
+print("\(response?.currently.temperature)")
 
 
 
