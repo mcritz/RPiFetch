@@ -50,14 +50,14 @@ struct DarkSkyResponse: Codable {
     let currentWeather: CurrentWeather
 }
 
-guard let jsonData = try? contents.data(using: .utf8) else {
+guard let jsonData = contents.data(using: .utf8) else {
     print(contents)
     fatalError("Could not convert response to data")
 }
 
 let decoder = JSONDecoder()
 
-let response = decoder(decode: DarkSkyResponse.self, from jsonData)
+let response = decoder(decode: DarkSkyResponse.self, from: jsonData)
 
 print("completed decode")
 print(response.currentWeather.temperature)
