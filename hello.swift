@@ -47,7 +47,7 @@ struct DarkSkyResponse: Codable {
     let longitude: Double
     let timezone: String
     let offset: Int
-    let currentWeather: CurrentWeather
+    let currently: CurrentWeather
 }
 
 guard let jsonData = contents.data(using: .utf8) else {
