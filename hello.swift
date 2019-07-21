@@ -57,7 +57,7 @@ guard let jsonData = contents.data(using: .utf8) else {
 
 let decoder = JSONDecoder()
 
-if let response: DarkSkyResponse = decoder.decode(DarkSkyResponse.self, from: jsonData) 
+let response: DarkSkyResponse = try? decoder.decode(DarkSkyResponse.self, from: jsonData)
 
 print("completed decode")
 print(response)
