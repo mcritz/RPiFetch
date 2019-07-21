@@ -1,13 +1,8 @@
-#!/usr/bin/env swift
-
 import Foundation
 
 print("Daily Pi! Powered by DarkSky")
 
-guard let wxApiKey = ProcessInfo.processInfo.environment["DARKSKYAPIKEY"] else {
-    fatalError("Must set DARKSKYAPIKEY environment variable. Get an API key at https://darksky.net/poweredby")
-}
-
+let wxApiKey = "f55492a8e57143a8bd77465a81559620"
 
 guard let url = URL(string: "https://api.darksky.net/forecast/\(wxApiKey)/37.8267,-122.4233?exclude=minutely,hourly,daily,alerts,flags") else {
     fatalError("Could not create a valid url for \(wxApiKey)")
@@ -64,7 +59,3 @@ if let response = response {
     print(response.currently)
     print("\(response.currently.summary)\n\(response.currently.temperature)°F")
 }
-
-
-
-
