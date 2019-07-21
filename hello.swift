@@ -14,7 +14,7 @@ guard let url = URL(string: "https://api.darksky.net/forecast/\(wxApiKey)/37.826
 }
 
 
-guard let contents = String(contentsOf: url) else {
+guard let contents = try? String(contentsOf: url) else {
     fatalError("Could not load weather data")
 }
 
