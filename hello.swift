@@ -20,3 +20,45 @@ guard let contents = try? String(contentsOf: url) else {
 
 print(contents)
 
+struct CurrentWeather: Codable {
+    let time: Int
+    let summary: String
+    let icon: String
+    let nearestStormDistance: Int
+    let nearestStormBearing: Int
+    let percipIntensity: Int
+    let precipProbability: Int
+    let temperature: Double
+    let apparentTemperature: Double
+    let dewPoint: Double
+    let humidity: Double
+    let pressure: Double
+    let windSpeed: Double
+    let windGust: Double
+    let windBearing: Int
+    let cloudCover: Double
+    let uvIndex: Int
+    let visibility: Int
+    let ozone: Double
+}
+
+struct DarkSkyResponse: Codable {
+    let latitude: Double
+    let longitude: Double
+    let timezone: String
+    let offset: Int
+    let currentWeather: CurrentWeather
+}
+
+guard let jsonData = try? contents.data(using: .utf8) else {
+    print(contents)
+    fatalError("Could not convert response to data")
+}
+
+let decoder = JSONDecoder()
+
+let response = decoder(decode: DarkSkyResponse.self, from jsonData)
+
+print("completed decode")
+print(response.currentWeather.temperature)
+
