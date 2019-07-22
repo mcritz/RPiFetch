@@ -1,5 +1,5 @@
+/**
 #!/usr/bin/env swift
-
 import Foundation
 
 print("Daily Pi! Powered by DarkSky")
@@ -64,7 +64,7 @@ if let response = response {
     print(response.currently)
     print("\(response.currently.summary)\n\(response.currently.temperature)°F")
 }
-
+*/
 
 
 

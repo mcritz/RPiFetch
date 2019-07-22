@@ -1,0 +1,76 @@
+//
+//  DailyPu.swift
+//  
+//
+//  Created by Michael Critz on 7/21/19.
+//
+
+import Foundation
+import PythonKit
+
+struct CurrentWeather: Codable {
+    let time: Int
+    let summary: String
+    let icon: String
+    let nearestStormDistance: Int
+    let nearestStormBearing: Int
+    let precipIntensity: Int
+    let precipProbability: Int
+    let temperature: Double
+    let apparentTemperature: Double
+    let dewPoint: Double
+    let humidity: Double
+    let pressure: Double
+    let windSpeed: Double
+    let windGust: Double
+    let windBearing: Int
+    let cloudCover: Double
+    let uvIndex: Int
+    let visibility: Double
+    let ozone: Double
+}
+
+struct DarkSkyResponse: Codable {
+    let latitude: Double
+    let longitude: Double
+    let timezone: String
+    let offset: Int
+    let currently: CurrentWeather
+}
+
+class NetworkService {
+    static func getWeather() {
+        print("Daily Pi! Powered by DarkSky")
+        
+        guard let wxApiKey = ProcessInfo.processInfo.environment["DARKSKYAPIKEY"] else {
+            fatalError("Must set DARKSKYAPIKEY environment variable. Get an API key at https://darksky.net/poweredby")
+        }
+
+        guard let url = URL(string: "https://api.darksky.net/forecast/\(wxApiKey)/37.8267,-122.4233?exclude=minutely,hourly,daily,alerts,flags") else {
+            fatalError("Could not create a valid url for \(wxApiKey)")
+        }
+        
+        guard let contents = try? String(contentsOf: url) else {
+            fatalError("Could not load weather data")
+        }
+        print(contents)
+        guard let jsonData = contents.data(using: .utf8) else {
+            print(contents)
+            fatalError("Could not convert response to data")
+        }
+        
+        let response = try? JSONDecoder().decode(DarkSkyResponse.self, from: jsonData)
+        
+        print("completed decode")
+        if let response = response {
+            print(response.currently)
+            print("\(response.currently.summary)\n\(response.currently.temperature)°F")
+        }
+    }
+}
+
+func main() {
+    NetworkService.getWeather()
+}
+
+main()
