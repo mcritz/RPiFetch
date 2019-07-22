@@ -12,10 +12,10 @@ struct CurrentWeather: Codable {
     let time: Int
     let summary: String
     let icon: String
-    let nearestStormDistance: Int
-    let nearestStormBearing: Int
-    let precipIntensity: Int
-    let precipProbability: Int
+    let nearestStormDistance: Int?
+    let nearestStormBearing: Int?
+    let precipIntensity: Int?
+    let precipProbability: Int?
     let temperature: Double
     let apparentTemperature: Double
     let dewPoint: Double
@@ -62,6 +62,7 @@ class NetworkService {
         let response = try? JSONDecoder().decode(DarkSkyResponse.self, from: jsonData)
         
         print("completed decode")
+        print(response)
         if let response = response {
             print(response.currently)
             print("\(response.currently.summary)\n\(response.currently.temperature)°F")
