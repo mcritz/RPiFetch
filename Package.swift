@@ -13,8 +13,8 @@ let package = Package(
         .target(
             name: "DailyPi",
             dependencies: ["PythonKit"]),
-        .testTarget(
-            name: "DailyPiTests",
-            dependencies: ["PythonKit"]),
+//        .testTarget(
+//            name: "DailyPiTests",
+//            dependencies: ["PythonKit"]),
     ]
 )
