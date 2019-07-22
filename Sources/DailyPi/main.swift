@@ -37,6 +37,22 @@ struct DarkSkyResponse: Codable {
     let currently: CurrentWeather
 }
 
+class FileService {
+    static func write(text: String, to filename: String) {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let fileURL = dir.appendingPathComponent(filename)
+            
+            do {
+                try text.write(to: fileURL, atomically: false, encoding: .utf8)
+            } catch {
+                fatalError("Could not save file")
+            }
+        }
+
+    }
+}
+
 class NetworkService {
     static func getWeather() -> String {
         print("Daily Pi! Powered by DarkSky")
@@ -76,7 +92,9 @@ class NetworkService {
 }
 
 func main() {
-    _ = NetworkService.getWeather()
+    let message = NetworkService.getWeather()
+    
+    FileService.write(text: message, to: "current-wx.txt")
 }
 
 main()
