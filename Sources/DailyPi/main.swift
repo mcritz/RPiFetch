@@ -95,6 +95,7 @@ func main() {
     let message = NetworkService.getWeather()
     
     FileService.write(text: message, to: "current-wx.txt")
+    exit(0)
 }
 
 main()
