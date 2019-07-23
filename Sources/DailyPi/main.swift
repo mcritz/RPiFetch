@@ -84,7 +84,7 @@ class NetworkService {
         if let response = response {
             print(response.currently)
             
-            currentWX = "\(response.currently.summary)\n\(response.currently.temperature)°F"
+            currentWX = "\(response.currently.summary)\n\(response.currently.temperature)F"
             print(currentWX)
         }
         return currentWX
